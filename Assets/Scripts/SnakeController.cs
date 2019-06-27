@@ -7,7 +7,7 @@ public class SnakeController : MonoBehaviour
     public const int BOARD_SIZE = 16;
 
     private static readonly Vector2 INITIAL_DIRECTION = Vector2.down;
-    private const float DELAY_BETWEEN_MOVEMENTS = 0.1f;
+    private const float DELAY_BETWEEN_MOVEMENTS = 0.13f;
 
     [SerializeField] private string _PlayerName;
     [SerializeField] private SnakeInput _SnakeInput;
@@ -33,6 +33,11 @@ public class SnakeController : MonoBehaviour
             _CurrentWaitTime += DELAY_BETWEEN_MOVEMENTS;
             _Head.Move(_CurrentDirection);
         }
+    }
+    
+    public void CheckForEating()
+    {
+        _Head.CheckForEating();
     }
 
     private void LateUpdate()

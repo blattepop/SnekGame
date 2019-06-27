@@ -43,6 +43,11 @@ public class SnakeGameController : MonoBehaviour
         {
             snake.UpdateSnakeMovement();
         }
+
+        foreach (var snake in _Snakes)
+        {
+            snake.CheckForEating();
+        }
     }
 
     private void LateUpdate()

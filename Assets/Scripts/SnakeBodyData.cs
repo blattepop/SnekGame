@@ -56,12 +56,28 @@ public class SnakeBodyData
             {
                 BodyObject.transform.position = Parent.PreviousPosition;
             }
-
-            if (!HasEatenFood())
+            
+            if (Child != null && Child != this && Child != Parent)
             {
-                if (Child != null && Child != this && Child != Parent)
+                Child.Move(direction);
+            }
+        }
+    }
+
+    public void CheckForEating()
+    {
+        var colliders = Physics2D.OverlapCircleAll(BodyObject.transform.position, 0.4f);
+
+        foreach (var collider in colliders)
+        {
+            IEatable eatable = collider.GetComponent<IEatable>();
+
+            if (eatable != BodyObject && eatable != null)
+            {
+                if (eatable.CanBeEatenBy(this))
                 {
-                    Child.Move(direction);
+                    eatable.OnEatenBy(this);
+                    return;
                 }
             }
         }
@@ -75,25 +91,5 @@ public class SnakeBodyData
         {
             Child.Kill();
         }
-    }
-
-    private bool HasEatenFood()
-    {
-        var colliders = Physics2D.OverlapCircleAll(BodyObject.transform.position, 0.4f);
-
-        foreach (var collider in colliders)
-        {
-            IEatable eatable = collider.GetComponent<IEatable>();
-
-            if (eatable != BodyObject && eatable != null)
-            {
-                if (eatable.CanBeEatenBy(this))
-                {
-                    return eatable.OnEatenBy(this);
-                }
-            }
-        }
-        
-        return false;
     }
 }
