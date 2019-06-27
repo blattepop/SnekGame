@@ -7,6 +7,8 @@ The game will start after a brief delay, the code is setup in a way that we can 
 
 When a player wins, the game restarts automatically.
 
+PS : YOU MIGHT NEED TO DOWNLOAD THE BUILD'S ZIP MANUALLY.
+
 CONTROLS : 
 Arrows for the red snek.
 WASD for the blue snek.
